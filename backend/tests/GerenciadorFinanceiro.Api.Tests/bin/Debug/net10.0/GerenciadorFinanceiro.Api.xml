@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GerenciadorFinanceiro.Api</name>
+    </assembly>
+    <members>
+        <member name="T:GerenciadorFinanceiro.Api.Controllers.PessoasController">
+            <summary>
+            Expõe os endpoints HTTP para cadastro, consulta e exclusão de pessoas.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Controllers.PessoasController.#ctor(GerenciadorFinanceiro.Api.Services.PessoaService)">
+            <summary>
+            Expõe os endpoints HTTP para cadastro, consulta e exclusão de pessoas.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Controllers.PessoasController.Criar(GerenciadorFinanceiro.Api.Dtos.Pessoas.CriarPessoaRequest,System.Threading.CancellationToken)">
+            <summary>
+            Cadastra uma pessoa.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Controllers.PessoasController.Listar(System.Threading.CancellationToken)">
+            <summary>
+            Lista todas as pessoas cadastradas.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Controllers.PessoasController.Excluir(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Exclui uma pessoa e todas as suas transações.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Controllers.TotaisController">
+            <summary>
+            Expõe a consulta consolidada de receitas, despesas e saldos.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Controllers.TotaisController.#ctor(GerenciadorFinanceiro.Api.Services.TotaisService)">
+            <summary>
+            Expõe a consulta consolidada de receitas, despesas e saldos.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Controllers.TotaisController.Consultar(System.Threading.CancellationToken)">
+            <summary>
+            Consulta os totais por pessoa e o total geral.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Controllers.TransacoesController">
+            <summary>
+            Expõe os endpoints HTTP para criação e consulta de transações.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Controllers.TransacoesController.#ctor(GerenciadorFinanceiro.Api.Services.TransacaoService)">
+            <summary>
+            Expõe os endpoints HTTP para criação e consulta de transações.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Controllers.TransacoesController.Criar(GerenciadorFinanceiro.Api.Dtos.Transacoes.CriarTransacaoRequest,System.Threading.CancellationToken)">
+            <summary>
+            Cadastra uma transação para uma pessoa existente.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Controllers.TransacoesController.Listar(System.Threading.CancellationToken)">
+            <summary>
+            Lista todas as transações cadastradas.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Data.AppDbContext">
+            <summary>
+            Centraliza o mapeamento das entidades e as regras de integridade do banco.
+            </summary>
+            <remarks>
+            O contexto define tabelas, chaves, limites, relacionamentos e restrições.
+            Regras que dependem do estado da aplicação permanecem nos serviços.
+            </remarks>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Data.AppDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{GerenciadorFinanceiro.Api.Data.AppDbContext})">
+            <summary>
+            Centraliza o mapeamento das entidades e as regras de integridade do banco.
+            </summary>
+            <remarks>
+            O contexto define tabelas, chaves, limites, relacionamentos e restrições.
+            Regras que dependem do estado da aplicação permanecem nos serviços.
+            </remarks>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Dtos.Pessoas.CriarPessoaRequest">
+            <summary>
+            Define os dados aceitos pela API para cadastrar uma pessoa.
+            </summary>
+            <remarks>
+            As validações são estruturais. Regras que exigem consultas ou estado
+            da aplicação devem permanecer na camada de serviço.
+            </remarks>
+        </member>
+        <member name="P:GerenciadorFinanceiro.Api.Dtos.Pessoas.CriarPessoaRequest.Nome">
+            <summary>
+            Nome da pessoa, limitado ao tamanho aceito pelo banco.
+            </summary>
+        </member>
+        <member name="P:GerenciadorFinanceiro.Api.Dtos.Pessoas.CriarPessoaRequest.Idade">
+            <summary>
+            Idade obrigatória entre 0 e 130 anos.
+            </summary>
+            <remarks>
+            O tipo anulável diferencia idade zero de um campo não enviado.
+            </remarks>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Dtos.Pessoas.PessoaResponse">
+            <summary>
+            Representa os dados de uma pessoa retornados pela API.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Dtos.Pessoas.PessoaResponse.#ctor(System.Guid,System.String,System.Int32)">
+            <summary>
+            Representa os dados de uma pessoa retornados pela API.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Dtos.Totais.ConsultaTotaisResponse">
+            <summary>
+            Agrupa os totais individuais e o consolidado geral da aplicação.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Dtos.Totais.ConsultaTotaisResponse.#ctor(System.Collections.Generic.IReadOnlyList{GerenciadorFinanceiro.Api.Dtos.Totais.TotalPessoaResponse},GerenciadorFinanceiro.Api.Dtos.Totais.TotalGeralResponse)">
+            <summary>
+            Agrupa os totais individuais e o consolidado geral da aplicação.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Dtos.Totais.TotalGeralResponse">
+            <summary>
+            Contém os valores consolidados de todas as pessoas.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Dtos.Totais.TotalGeralResponse.#ctor(System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Contém os valores consolidados de todas as pessoas.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Dtos.Totais.TotalPessoaResponse">
+            <summary>
+            Contém receitas, despesas e saldo consolidados de uma pessoa.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Dtos.Totais.TotalPessoaResponse.#ctor(System.Guid,System.String,System.Decimal,System.Decimal,System.Decimal)">
+            <summary>
+            Contém receitas, despesas e saldo consolidados de uma pessoa.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Dtos.Transacoes.CriarTransacaoRequest">
+            <summary>
+            Define os dados aceitos pela API para cadastrar uma transação.
+            </summary>
+        </member>
+        <member name="P:GerenciadorFinanceiro.Api.Dtos.Transacoes.CriarTransacaoRequest.Descricao">
+            <summary>
+            Descrição da transação, limitada ao tamanho aceito pelo banco.
+            </summary>
+        </member>
+        <member name="P:GerenciadorFinanceiro.Api.Dtos.Transacoes.CriarTransacaoRequest.Valor">
+            <summary>
+            Valor positivo da transação. O tipo define se é entrada ou saída.
+            </summary>
+        </member>
+        <member name="P:GerenciadorFinanceiro.Api.Dtos.Transacoes.CriarTransacaoRequest.Tipo">
+            <summary>
+            Define se a transação é uma receita ou despesa.
+            </summary>
+        </member>
+        <member name="P:GerenciadorFinanceiro.Api.Dtos.Transacoes.CriarTransacaoRequest.PessoaId">
+            <summary>
+            Identificador da pessoa associada à transação.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Dtos.Transacoes.CriarTransacaoRequest.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Valida valores padrão ou inválidos não cobertos pelos atributos.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Dtos.Transacoes.TransacaoResponse">
+            <summary>
+            Representa uma transação retornada pela API com sua pessoa associada.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Dtos.Transacoes.TransacaoResponse.#ctor(System.Guid,System.String,System.Decimal,GerenciadorFinanceiro.Api.Models.TipoTransacao,System.Guid,System.String)">
+            <summary>
+            Representa uma transação retornada pela API com sua pessoa associada.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.ErrorHandling.ApiExceptionHandler">
+            <summary>
+            Converte exceções não tratadas em respostas HTTP 500 padronizadas.
+            </summary>
+            <remarks>
+            Registra o erro completo nos logs e retorna ao cliente apenas informações
+            seguras, incluindo um identificador que permite localizar a falha.
+            </remarks>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.ErrorHandling.ApiExceptionHandler.#ctor(Microsoft.Extensions.Logging.ILogger{GerenciadorFinanceiro.Api.ErrorHandling.ApiExceptionHandler},Microsoft.AspNetCore.Http.IProblemDetailsService)">
+            <summary>
+            Converte exceções não tratadas em respostas HTTP 500 padronizadas.
+            </summary>
+            <remarks>
+            Registra o erro completo nos logs e retorna ao cliente apenas informações
+            seguras, incluindo um identificador que permite localizar a falha.
+            </remarks>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.ErrorHandling.ApiExceptionHandler.TryHandleAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception,System.Threading.CancellationToken)">
+            <summary>
+            Trata uma exceção inesperada e gera uma resposta Problem Details.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Models.Pessoa">
+            <summary>
+            Representa uma pessoa responsável por transações financeiras.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Models.TipoTransacao">
+            <summary>
+            Define os tipos de movimentação financeira aceitos pela aplicação.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Models.Transacao">
+            <summary>
+            Representa uma receita ou despesa associada a uma pessoa.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Services.PessoaService">
+            <summary>
+            Centraliza as operações de cadastro, consulta e exclusão de pessoas.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.PessoaService.#ctor(GerenciadorFinanceiro.Api.Data.AppDbContext)">
+            <summary>
+            Centraliza as operações de cadastro, consulta e exclusão de pessoas.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.PessoaService.CriarAsync(GerenciadorFinanceiro.Api.Dtos.Pessoas.CriarPessoaRequest,System.Threading.CancellationToken)">
+            <summary>
+            Cadastra uma pessoa após a validação estrutural do request.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.PessoaService.ListarAsync(System.Threading.CancellationToken)">
+            <summary>
+            Lista todas as pessoas cadastradas em ordem alfabética.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.PessoaService.ExcluirAsync(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Exclui uma pessoa e suas transações pelo comportamento em cascata.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Services.Resultados.CriarTransacaoStatus">
+            <summary>
+            Representa os resultados possíveis da criação de uma transação.
+            Evita textos ou números isolados para identificar o resultado.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Services.Resultados.CriarTransacaoResultado">
+            <summary>
+            Retorna o status da operação e, em caso de sucesso, a transação criada.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.Resultados.CriarTransacaoResultado.#ctor(GerenciadorFinanceiro.Api.Services.Resultados.CriarTransacaoStatus,GerenciadorFinanceiro.Api.Dtos.Transacoes.TransacaoResponse)">
+            <summary>
+            Retorna o status da operação e, em caso de sucesso, a transação criada.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.Resultados.CriarTransacaoResultado.Criada(GerenciadorFinanceiro.Api.Dtos.Transacoes.TransacaoResponse)">
+            <summary>
+            Cria um resultado de sucesso contendo a transação cadastrada.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.Resultados.CriarTransacaoResultado.PessoaNaoEncontrada">
+            <summary>
+            Cria um resultado indicando que a pessoa informada não existe.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.Resultados.CriarTransacaoResultado.ReceitaProibidaParaMenor">
+            <summary>
+            Cria um resultado indicando que menores não podem cadastrar receitas.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Services.TotaisService">
+            <summary>
+            Consolida receitas, despesas e saldos por pessoa e no total geral.
+            </summary>
+            <remarks>
+            A consulta parte das pessoas cadastradas, soma separadamente suas
+            receitas e despesas e calcula o saldo pela diferença entre os valores.
+            Pessoas sem transações permanecem no resultado com totais iguais a zero.
+            </remarks>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.TotaisService.#ctor(GerenciadorFinanceiro.Api.Data.AppDbContext)">
+            <summary>
+            Consolida receitas, despesas e saldos por pessoa e no total geral.
+            </summary>
+            <remarks>
+            A consulta parte das pessoas cadastradas, soma separadamente suas
+            receitas e despesas e calcula o saldo pela diferença entre os valores.
+            Pessoas sem transações permanecem no resultado com totais iguais a zero.
+            </remarks>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.TotaisService.ConsultarAsync(System.Threading.CancellationToken)">
+            <summary>
+            Calcula os totais financeiros individuais e gerais.
+            </summary>
+        </member>
+        <member name="T:GerenciadorFinanceiro.Api.Services.TransacaoService">
+            <summary>
+            Centraliza as regras de negócio e operações de persistência das transações.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.TransacaoService.#ctor(GerenciadorFinanceiro.Api.Data.AppDbContext)">
+            <summary>
+            Centraliza as regras de negócio e operações de persistência das transações.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.TransacaoService.CriarAsync(GerenciadorFinanceiro.Api.Dtos.Transacoes.CriarTransacaoRequest,System.Threading.CancellationToken)">
+            <summary>
+            Cadastra uma transação após validar a pessoa e as regras aplicáveis.
+            </summary>
+        </member>
+        <member name="M:GerenciadorFinanceiro.Api.Services.TransacaoService.ListarAsync(System.Threading.CancellationToken)">
+            <summary>
+            Lista as transações cadastradas com os dados da pessoa associada.
+            </summary>
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
+            </summary>
+        </member>
+    </members>
+</doc>
